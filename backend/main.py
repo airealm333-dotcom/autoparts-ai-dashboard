@@ -1,32 +1,52 @@
-
 from pydantic import BaseModel
 from ai_insights import generate_ai_analysis, answer_inventory_question
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import io
+import os
 
 from engine import generate_sample_data, get_default_inventory, run_full_analysis
 
-app = FastAPI(title="StockSense AI")
+app = FastAPI(title="AutoParts AI")
+
+# ── CORS ──────────────────────────────────────────────────────────────────
+# Read allowed origins from environment variable (set on Render)
+# Falls back to allowing all origins for local dev
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "").split(",")
+
+# Always include localhost for local development
+DEFAULT_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+]
+
+# Combine env origins + defaults, filter empty strings
+origins = [o.strip() for o in ALLOWED_ORIGINS + DEFAULT_ORIGINS if o.strip()]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",  # allow ALL vercel preview URLs
+    allow_credentials=False,   # must be False when using wildcard-style origins
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
 )
+
+# ── Routes ────────────────────────────────────────────────────────────────
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "message": "StockSense AI is running!"}
+    return {"status": "ok", "message": "AutoParts AI is running!"}
+
 
 @app.get("/api/demo")
 def get_demo():
     df        = generate_sample_data()
     inventory = get_default_inventory()
     return run_full_analysis(df, inventory)
+
 
 @app.post("/api/upload")
 async def upload(file: UploadFile = File(...)):
@@ -59,11 +79,13 @@ async def upload(file: UploadFile = File(...)):
 
     return run_full_analysis(df, inventory)
 
+
 @app.get("/api/sample-csv")
 def sample_csv():
     df     = generate_sample_data()
     sample = df.head(60).to_csv(index=False)
-    return {"csv": sample, "filename": "stocksense_sample.csv"}
+    return {"csv": sample, "filename": "autoparts_sample.csv"}
+
 
 @app.get("/api/ai-analysis")
 def get_ai_analysis():
