@@ -7,7 +7,7 @@ import {
 } from "recharts";
 import { CAT_ICON, TREND_COLOR, ABC_COLOR } from "../components/Shared.jsx";
 
-const API    = "http://localhost:8000";
+const API    = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const COLORS = ["#2563eb","#7c3aed","#0891b2","#16a34a","#d97706","#dc2626","#6366f1","#0f172a"];
 
 // ── Markdown → React renderer (no external library needed) ────────────────
