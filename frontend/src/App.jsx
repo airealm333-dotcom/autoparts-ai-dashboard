@@ -7,7 +7,7 @@ import Forecasts   from "./pages/Forecasts.jsx";
 import Insights    from "./pages/Insights.jsx";
 import UploadPanel from "./components/UploadPanel.jsx";
 
-const API  = "http://localhost:8000";
+const API  = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const TABS = [
   { id:"Overview",       label:"Overview",        icon:"🏠" },
   { id:"Reorder Alerts", label:"Reorder Alerts",  icon:"🔔" },
