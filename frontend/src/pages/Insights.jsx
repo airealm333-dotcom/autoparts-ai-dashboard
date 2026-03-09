@@ -759,7 +759,7 @@ export default function Insights({ products, summary }) {
                   </div>
                   <div style={{ textAlign: "right" }}>
                     <span style={{ fontSize: 13, fontWeight: 800, color: ABC_COLOR[cls] }}>
-                      Rs.{(abcValue[cls] / 1000).toFixed(0)}K
+                      ₹{abcValue[cls] >= 100000 ? (abcValue[cls]/100000).toFixed(2)+"L" : (abcValue[cls]/1000).toFixed(0)+"K"}
                     </span>
                     <span style={{ fontSize: 10, color: "var(--text3)", marginLeft: 4,
                       fontFamily: "var(--mono)" }}>({pct}%)</span>
@@ -778,7 +778,7 @@ export default function Insights({ products, summary }) {
               TOTAL INVENTORY VALUE
             </div>
             <div style={{ fontSize: 22, fontWeight: 900, color: "var(--text)" }}>
-              Rs.{(totalVal / 100000).toFixed(2)}L
+              ₹{(totalVal / 100000).toFixed(2)}L
             </div>
           </div>
         </InsightCard>
@@ -838,11 +838,7 @@ export default function Insights({ products, summary }) {
           <div style={{ fontWeight: 800, fontSize: 14, color: "var(--primary)" }}>
             📋 Rule-Based Recommendations
           </div>
-          <span style={{ fontSize: 10, color: "var(--text4)", fontFamily: "var(--mono)",
-            background: "var(--bg2)", border: "1px solid var(--border)",
-            padding: "2px 8px", borderRadius: 4 }}>
-            logic-driven · not AI
-          </span>
+
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           {[
@@ -912,25 +908,8 @@ export default function Insights({ products, summary }) {
             display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
             🤖
           </div>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: 15, color: "#fff" }}>
-              Real AI — Powered by Claude API
-            </div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.65)", fontFamily: "var(--mono)" }}>
-              reads your live inventory data · dynamic answers · not hardcoded
-            </div>
-          </div>
-          <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
-            <span style={{ background: "rgba(255,255,255,0.15)", borderRadius: 6,
-              padding: "3px 10px", fontSize: 10, color: "#fff",
-              fontFamily: "var(--mono)", fontWeight: 700, border: "1px solid rgba(255,255,255,0.25)" }}>
-              ANTHROPIC API
-            </span>
-            <span style={{ background: "rgba(255,255,255,0.15)", borderRadius: 6,
-              padding: "3px 10px", fontSize: 10, color: "#fff",
-              fontFamily: "var(--mono)", fontWeight: 700, border: "1px solid rgba(255,255,255,0.25)" }}>
-              ~Rs.0.001 / call
-            </span>
+          <div style={{ fontWeight: 800, fontSize: 15, color: "#fff" }}>
+            AI Assistant
           </div>
         </div>
 
