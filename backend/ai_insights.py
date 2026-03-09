@@ -60,7 +60,7 @@ Keep it under 250 words. Be direct and specific. No generic advice.
 """
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-sonnet-4-6",
         max_tokens=600,
         messages=[{"role": "user", "content": data_summary}]
     )
@@ -114,7 +114,7 @@ USER QUESTION: {question}
 """
 
     message = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=300,
         messages=[{"role": "user", "content": context}]
     )
