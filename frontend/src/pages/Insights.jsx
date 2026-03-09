@@ -527,11 +527,6 @@ function AIChatBox() {
           </button>
         </div>
 
-        {/* Cost note */}
-        <div style={{ marginTop: 8, fontSize: 10, color: "var(--text4)",
-          fontFamily: "var(--mono)", textAlign: "right" }}>
-          ~Rs.0.001 per question · claude-haiku-4-5 · avg response time 1–2s
-        </div>
       </div>
 
       {/* Keyframes */}
@@ -939,29 +934,6 @@ export default function Insights({ products, summary }) {
           </div>
         </div>
 
-        {/* Setup instructions banner */}
-        <div style={{ background: "#fefce8", borderBottom: "1px solid #fde68a",
-          padding: "10px 22px", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 14 }}>⚡</span>
-          <span style={{ fontSize: 12, color: "#92400e", fontFamily: "var(--mono)" }}>
-            Setup required:&nbsp;
-            <code style={{ background: "#fef3c7", padding: "1px 6px", borderRadius: 4 }}>
-              pip install anthropic
-            </code>
-            &nbsp;·&nbsp;
-            <code style={{ background: "#fef3c7", padding: "1px 6px", borderRadius: 4 }}>
-              set ANTHROPIC_API_KEY=sk-ant-...
-            </code>
-            &nbsp;·&nbsp; add
-            <code style={{ background: "#fef3c7", padding: "1px 6px", borderRadius: 4, margin: "0 4px" }}>
-              ai_insights.py
-            </code>
-            and 2 routes to
-            <code style={{ background: "#fef3c7", padding: "1px 6px", borderRadius: 4, marginLeft: 4 }}>
-              main.py
-            </code>
-          </span>
-        </div>
 
         <div style={{ padding: 20, background: "var(--white)" }}>
           <AIChatBox />
