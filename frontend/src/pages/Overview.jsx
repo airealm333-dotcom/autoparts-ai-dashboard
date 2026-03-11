@@ -1,5 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import { ABC_COLOR, STATUS_COLOR, CAT_ICON, StatusBadge, ABCBadge, TrendPill } from "../components/Shared.jsx";
+import { ABC_COLOR, STATUS_COLOR, StatusBadge, ABCBadge, TrendPill } from "../components/Shared.jsx";
 
 const CAT_COLORS = ["#2563eb","#7c3aed","#0891b2","#16a34a","#d97706","#dc2626","#0f172a","#6366f1"];
 
@@ -20,7 +20,7 @@ export default function Overview({ products, summary, onTabChange }) {
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
 
       {/* Row 1: KPI summary cards */}
-      <div className="three-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:14}}>
+      <div className="three-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:14,alignItems:"stretch"}}>
 
         {/* Inventory Health */}
         <div className="card fade-up">
@@ -58,7 +58,7 @@ export default function Overview({ products, summary, onTabChange }) {
           <div style={{fontSize:11,color:"var(--text3)",fontFamily:"var(--mono)",marginBottom:14}}>
             avg daily revenue contribution
           </div>
-          <ResponsiveContainer width="100%" height={180}>
+          <ResponsiveContainer width="100%" height={280}>
             <BarChart data={catData} layout="vertical" margin={{top:0,right:10,bottom:0,left:0}}>
               <XAxis type="number" hide/>
               <YAxis type="category" dataKey="cat" width={90}
@@ -74,7 +74,7 @@ export default function Overview({ products, summary, onTabChange }) {
             </BarChart>
           </ResponsiveContainer>
           <div style={{marginTop:12}}>
-            {catData.slice(0,3).map((c,i)=>(
+            {catData.map((c,i)=>(
               <div key={i} style={{display:"flex",justifyContent:"space-between",
                 alignItems:"center",marginBottom:4}}>
                 <div style={{display:"flex",alignItems:"center",gap:6}}>
@@ -96,25 +96,37 @@ export default function Overview({ products, summary, onTabChange }) {
             revenue-based part prioritisation
           </div>
           {["A","B","C"].map(cls=>(
-            <div key={cls} style={{marginBottom:14}}>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
-                <div style={{width:26,height:26,borderRadius:7,background:ABC_COLOR[cls]+"15",
+            <div key={cls} style={{marginBottom:20,paddingBottom:20,
+              borderBottom:cls!=="C"?"1px solid var(--border)":"none"}}>
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+                <div style={{width:28,height:28,borderRadius:7,background:ABC_COLOR[cls]+"15",
                   border:`1px solid ${ABC_COLOR[cls]}30`,display:"flex",alignItems:"center",
                   justifyContent:"center",fontSize:12,fontWeight:900,color:ABC_COLOR[cls],
                   fontFamily:"var(--mono)"}}>
                   {cls}
                 </div>
-                <span style={{fontSize:11,color:"var(--text3)",fontFamily:"var(--mono)"}}>
-                  {cls==="A"?"Top revenue — protect stock"
-                   :cls==="B"?"Mid-tier — monitor weekly"
-                   :"Low priority — watch overstock"}
+                <div>
+                  <div style={{fontSize:12,fontWeight:700,color:"var(--text2)"}}>
+                    {cls==="A"?"Top Revenue Parts"
+                     :cls==="B"?"Mid-Tier Parts"
+                     :"Low Priority Parts"}
+                  </div>
+                  <div style={{fontSize:10,color:"var(--text4)",fontFamily:"var(--mono)"}}>
+                    {cls==="A"?"protect stock — drives 80% revenue"
+                     :cls==="B"?"monitor weekly"
+                     :"watch for overstock"}
+                  </div>
+                </div>
+                <span style={{marginLeft:"auto",fontSize:11,fontWeight:800,
+                  color:ABC_COLOR[cls],fontFamily:"var(--mono)"}}>
+                  {abcGroups[cls].length} parts
                 </span>
               </div>
-              <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+              <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
                 {abcGroups[cls].map(p=>(
-                  <span key={p.product_id} style={{fontSize:10,background:ABC_COLOR[cls]+"0d",
+                  <span key={p.product_id} style={{fontSize:11,background:ABC_COLOR[cls]+"0d",
                     color:ABC_COLOR[cls],border:`1px solid ${ABC_COLOR[cls]}25`,
-                    borderRadius:5,padding:"2px 7px",fontWeight:600}}>
+                    borderRadius:6,padding:"3px 9px",fontWeight:600}}>
                     {p.product_name.split(" ").slice(0,2).join(" ")}
                   </span>
                 ))}
@@ -159,7 +171,7 @@ export default function Overview({ products, summary, onTabChange }) {
                   </td>
                   <td>
                     <span style={{fontSize:12,color:"var(--text2)"}}>
-                      {CAT_ICON[p.category]||"📦"} {p.category}
+                      {p.category}
                     </span>
                   </td>
                   <td>
@@ -197,27 +209,26 @@ export default function Overview({ products, summary, onTabChange }) {
       <div className="card fade-up-4" style={{background:"linear-gradient(135deg,#f8faff,#f0f4ff)",
         border:"1px solid #dbeafe"}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-          <span style={{fontSize:18}}>🤖</span>
           <div style={{fontWeight:800,fontSize:14,color:"var(--primary)"}}>AI Executive Summary</div>
         </div>
         <div className="three-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:16}}>
           {[
             {
-              icon:"🚨",title:"Action Required",color:"var(--red)",bg:"var(--red-lt)",border:"var(--red-md)",
+              icon:"",title:"Action Required",color:"var(--red)",bg:"var(--red-lt)",border:"var(--red-md)",
               text: summary.critical_reorder_count>0
                 ? `${summary.critical_reorder_count} parts will stockout within 7 days. Estimated procurement cost: ₹${summary.total_order_value.toLocaleString("en-IN")}.`
                 : "All critical parts are well stocked. No immediate procurement needed.",
               btn: summary.critical_reorder_count>0 ? {label:"View Alerts →",tab:"Reorder Alerts"} : null
             },
             {
-              icon:"💰",title:"Capital Recovery",color:"var(--purple)",bg:"var(--purple-lt)",border:"var(--purple-md)",
+              icon:"",title:"Capital Recovery",color:"var(--purple)",bg:"var(--purple-lt)",border:"var(--purple-md)",
               text: summary.dead_stock_value>0
                 ? `₹${summary.dead_stock_value.toLocaleString("en-IN")} locked in ${summary.dead_stock_count} slow-moving parts. Consider bulk discounts to distributors.`
                 : "No dead stock detected. Working capital is efficiently deployed.",
               btn: summary.dead_stock_count>0 ? {label:"View Dead Stock →",tab:"Dead Stock"} : null
             },
             {
-              icon:"📈",title:"Demand Outlook",color:"var(--green)",bg:"var(--green-lt)",border:"var(--green-md)",
+              icon:"",title:"Demand Outlook",color:"var(--green)",bg:"var(--green-lt)",border:"var(--green-md)",
               text: `${summary.trending_up_count} parts showing upward demand trend. Total 30-day forecast: ${summary.total_forecast_30d.toLocaleString("en-IN")} units across all categories.`,
               btn: {label:"View Forecasts →",tab:"Forecasts"}
             },
@@ -225,7 +236,7 @@ export default function Overview({ products, summary, onTabChange }) {
             <div key={i} style={{background:item.bg,border:`1px solid ${item.border}`,
               borderRadius:10,padding:16}}>
               <div style={{fontSize:12,color:item.color,fontWeight:700,marginBottom:8}}>
-                {item.icon} {item.title}
+                {item.title}
               </div>
               <div style={{fontSize:12,color:"var(--text2)",lineHeight:1.7,marginBottom:item.btn?10:0}}>
                 {item.text}

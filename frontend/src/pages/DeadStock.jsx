@@ -37,7 +37,7 @@ function DeadCard({ p }) {
         padding:"12px 14px",marginBottom:12}}>
         <div style={{fontSize:10,color:accent,fontWeight:700,
           letterSpacing:"0.08em",marginBottom:6,fontFamily:"var(--mono)"}}>
-          🤖 AI RECOMMENDATION
+          AI RECOMMENDATION
         </div>
         <div style={{fontSize:12,color:"var(--text2)",lineHeight:1.7}}>
           {ds.is_dead
@@ -61,7 +61,7 @@ export default function DeadStock({ products, summary }) {
   const slow = products?.filter(p=>p.dead_stock.is_slow)??[];
 
   if (dead.length===0 && slow.length===0)
-    return <EmptyState icon="🎉" title="No dead or slow stock"
+    return <EmptyState icon="" title="No dead or slow stock"
       sub="all inventory moving at healthy velocity"/>;
 
   return (
@@ -89,7 +89,7 @@ export default function DeadStock({ products, summary }) {
 
       {dead.length>0 && (
         <div style={{marginBottom:28}}>
-          <SectionHeader title="⚫ Dead Stock — 90+ Days No Movement"
+          <SectionHeader title=" Dead Stock — 90+ Days No Movement"
             sub="immediate action needed to free working capital"
             count={dead.length}/>
           <div className="card-grid" style={{display:"grid",
@@ -101,7 +101,7 @@ export default function DeadStock({ products, summary }) {
 
       {slow.length>0 && (
         <div>
-          <SectionHeader title="🟡 Slow Moving — 45–90 Days"
+          <SectionHeader title=" Slow Moving — 45–90 Days"
             sub="monitor closely — trending toward dead stock"
             count={slow.length}/>
           <div className="card-grid" style={{display:"grid",

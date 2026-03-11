@@ -9,11 +9,11 @@ import UploadPanel from "./components/UploadPanel.jsx";
 
 const API  = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const TABS = [
-  { id:"Overview",       label:"Overview",        icon:"🏠" },
-  { id:"Reorder Alerts", label:"Reorder Alerts",  icon:"🔔" },
-  { id:"Dead Stock",     label:"Dead Stock",       icon:"📦" },
-  { id:"Forecasts",      label:"Forecasts",        icon:"📈" },
-  { id:"Insights",       label:"AI Insights",      icon:"🤖" },
+  { id:"Overview",       label:"Overview",        icon:"" },
+  { id:"Reorder Alerts", label:"Reorder Alerts",  icon:"" },
+  { id:"Dead Stock",     label:"Dead Stock",       icon:"" },
+  { id:"Forecasts",      label:"Forecasts",        icon:"" },
+  { id:"Insights",       label:"AI Insights",      icon:"" },
 ];
 
 function Skeleton() {
@@ -104,7 +104,6 @@ export default function App() {
             <div style={{width:36,height:36,borderRadius:10,
               background:"linear-gradient(135deg,#2563eb,#1d4ed8)",
               display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>
-              🔧
             </div>
             <div>
               <div style={{fontWeight:800,fontSize:16,color:"var(--text)",letterSpacing:"-0.02em"}}>
@@ -129,7 +128,7 @@ export default function App() {
               </span>
             </div>
             <button className="btn btn-outline" onClick={()=>setShowUpload(!showUpload)} style={{fontSize:12}}>
-              📂 Upload Data
+              Upload Data
             </button>
             <button className="btn btn-primary" onClick={fetchDemo} style={{fontSize:12}}>
               ↺ Refresh
@@ -142,7 +141,6 @@ export default function App() {
       {summary?.critical_reorder_count > 0 && showAlert && (
         <div style={{background:"var(--red-lt)",borderBottom:"1px solid var(--red-md)",
           padding:"10px 20px",display:"flex",alignItems:"center",gap:10}}>
-          <span style={{fontSize:16}}>⚠️</span>
           <span style={{fontSize:13,color:"var(--red)",fontWeight:700}}>
             {summary.critical_reorder_count} spare part{summary.critical_reorder_count>1?"s":""} will
             stockout within 7 days — immediate procurement required
@@ -180,7 +178,7 @@ export default function App() {
         <div style={{maxWidth:1200,margin:"28px auto",padding:"0 20px"}}>
           <div style={{background:"#fffbeb",border:"1px solid #fde68a",
             borderRadius:16,padding:"32px 24px",textAlign:"center"}}>
-            <div style={{fontSize:44,marginBottom:14}}>☕</div>
+            <div style={{fontSize:32,marginBottom:14,color:"#d97706",fontWeight:800}}>...</div>
             <div style={{fontSize:17,fontWeight:800,color:"#92400e",marginBottom:6}}>
               Waking up the server...
             </div>
@@ -240,22 +238,22 @@ export default function App() {
             gridTemplateColumns:"repeat(5,1fr)",gap:14,marginBottom:28}}>
             <StatCard
               label="Total Parts" value={summary.total_products}
-              sub="monitored by AI" accent="#2563eb" accentClass="stat-blue" icon="🔧" delay="-1"/>
+              sub="monitored by AI" accent="#2563eb" accentClass="stat-blue" icon="" delay="-1"/>
             <StatCard
               label="Critical Stock" value={summary.critical_reorder_count}
               sub={summary.critical_reorder_count>0?"Order immediately":"All safe"}
-              accent="#dc2626" accentClass="stat-red" icon="🚨" delay="-2"/>
+              accent="#dc2626" accentClass="stat-red" icon="" delay="-2"/>
             <StatCard
               label="Dead Stock" value={summary.dead_stock_count}
               sub={`₹${(summary.dead_stock_value/1000).toFixed(0)}K locked`}
-              accent="#7c3aed" accentClass="stat-purple" icon="📦" delay="-3"/>
+              accent="#7c3aed" accentClass="stat-purple" icon="" delay="-3"/>
             <StatCard
               label="30-Day Forecast" value={summary.total_forecast_30d.toLocaleString("en-IN")}
-              sub="units predicted" accent="#16a34a" accentClass="stat-green" icon="📈" delay="-4"/>
+              sub="units predicted" accent="#16a34a" accentClass="stat-green" icon="" delay="-4"/>
             <StatCard
               label="Health Score" value={`${summary.inventory_health_score}%`}
               sub={summary.inventory_health_score>=70?"Good":"Needs attention"}
-              accent={healthColor} accentClass="stat-teal" icon="❤️" delay="-5"/>
+              accent={healthColor} accentClass="stat-teal" icon="" delay="-5"/>
           </div>
 
           {/* Tabs */}

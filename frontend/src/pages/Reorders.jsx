@@ -36,7 +36,7 @@ function ReorderCard({ p }) {
         <div>
           <div style={{fontSize:10,color:"var(--primary)",fontWeight:700,
             letterSpacing:"0.08em",marginBottom:4,fontFamily:"var(--mono)"}}>
-            🤖 AI RECOMMENDATION
+            AI RECOMMENDATION
           </div>
           <div style={{fontSize:16,fontWeight:900,color:"var(--primary)"}}>
             Order {r.suggested_reorder_qty.toLocaleString("en-IN")} units
@@ -71,7 +71,7 @@ export default function Reorders({ products }) {
   const totalValue = [...critical,...low].reduce((s,p)=>s+p.reorder.order_value,0);
 
   if (critical.length===0 && low.length===0)
-    return <EmptyState icon="✅" title="All parts are well stocked"
+    return <EmptyState icon="" title="All parts are well stocked"
       sub="no reorder alerts · ai will notify when action is needed"/>;
 
   return (
@@ -98,7 +98,7 @@ export default function Reorders({ products }) {
 
       {critical.length>0 && (
         <div style={{marginBottom:28}}>
-          <SectionHeader title="🔴 Critical — Order Immediately"
+          <SectionHeader title=" Critical — Order Immediately"
             sub="will stockout within 7 days at current usage rate"
             count={critical.length}/>
           <div className="card-grid" style={{display:"grid",
@@ -110,7 +110,7 @@ export default function Reorders({ products }) {
 
       {low.length>0 && (
         <div>
-          <SectionHeader title="🟡 Low Stock — Order This Week"
+          <SectionHeader title=" Low Stock — Order This Week"
             sub="will stockout within 15 days — plan procurement"
             count={low.length}/>
           <div className="card-grid" style={{display:"grid",

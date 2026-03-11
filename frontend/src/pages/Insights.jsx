@@ -291,7 +291,7 @@ function AIChatBox() {
           alignItems: "flex-start", marginBottom: 14 }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: 15, color: "var(--primary)" }}>
-              ✨ Auto-Analyse My Inventory
+              Auto-Analyse My Inventory
             </div>
             <div style={{ fontSize: 11, color: "var(--text3)", fontFamily: "var(--mono)", marginTop: 3 }}>
               claude reads your live data and writes a custom expert analysis
@@ -320,7 +320,7 @@ function AIChatBox() {
                       animation: "ai-spin 0.7s linear infinite" }} />
                     Claude is analysing...
                   </span>
-                : "🤖 Generate AI Analysis of My Inventory"
+                : "Generate AI Analysis"
               }
             </button>
           </div>
@@ -345,8 +345,9 @@ function AIChatBox() {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0,
                 background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
-                🤖
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 11, fontWeight: 800, color: "#fff", fontFamily: "var(--mono)" }}>
+                AI
               </div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)" }}>
@@ -367,7 +368,7 @@ function AIChatBox() {
         {analysisError && !loadingAnalysis && (
           <div style={{ background: "var(--red-lt)", border: "1px solid var(--red-md)",
             borderRadius: 10, padding: "12px 16px", fontSize: 13, color: "var(--red)" }}>
-            ⚠ {analysisError}
+            {analysisError}
             <div style={{ marginTop: 6, fontSize: 11, color: "var(--text3)", fontFamily: "var(--mono)" }}>
               Check: ANTHROPIC_API_KEY env var is set · pip install anthropic · uvicorn running on port 8000
             </div>
@@ -381,7 +382,7 @@ function AIChatBox() {
           alignItems: "center", marginBottom: 14 }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: 15, color: "var(--text)" }}>
-              💬 Ask Claude About Your Inventory
+              Ask Claude About Your Inventory
             </div>
             <div style={{ fontSize: 11, color: "var(--text3)", fontFamily: "var(--mono)", marginTop: 3 }}>
               plain english questions · claude reads live data to answer
@@ -429,8 +430,9 @@ function AIChatBox() {
                 {msg.role === "claude" && (
                   <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0,
                     background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
-                    🤖
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 11, fontWeight: 800, color: "#fff", fontFamily: "var(--mono)" }}>
+                    AI
                   </div>
                 )}
                 <div style={{
@@ -454,8 +456,9 @@ function AIChatBox() {
                 {msg.role === "user" && (
                   <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0,
                     background: "var(--bg2)", border: "1px solid var(--border)",
-                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
-                    👤
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 11, fontWeight: 800, color: "var(--text3)", fontFamily: "var(--mono)" }}>
+                    You
                   </div>
                 )}
               </div>
@@ -466,8 +469,9 @@ function AIChatBox() {
               <div style={{ display: "flex", gap: 10, alignItems: "flex-end" }}>
                 <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0,
                   background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
-                  🤖
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 11, fontWeight: 800, color: "#fff", fontFamily: "var(--mono)" }}>
+                  AI
                 </div>
                 <div style={{ padding: "13px 18px", borderRadius: "16px 16px 16px 4px",
                   background: "var(--surface2)", border: "1px solid var(--border)",
@@ -490,7 +494,7 @@ function AIChatBox() {
           <div style={{ marginBottom: 12, background: "var(--red-lt)",
             border: "1px solid var(--red-md)", borderRadius: 8,
             padding: "10px 14px", fontSize: 12, color: "var(--red)" }}>
-            ⚠ {chatError}
+            {chatError}
           </div>
         )}
 
@@ -593,7 +597,7 @@ export default function Insights({ products, summary }) {
         border: "1px solid #dbeafe",
       }}>
         <div style={{ fontWeight: 800, fontSize: 14, color: "var(--primary)", marginBottom: 16 }}>
-          📊 Inventory Intelligence Overview
+          Inventory Intelligence Overview
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 12 }}>
           {[
@@ -713,7 +717,7 @@ export default function Insights({ products, summary }) {
                       </td>
                       <td>
                         <span style={{ fontSize: 11, color: "var(--text3)" }}>
-                          {CAT_ICON[p.category] || "📦"} {p.category}
+                          {p.category}
                         </span>
                       </td>
                       <td>
@@ -836,14 +840,14 @@ export default function Insights({ products, summary }) {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
           <div style={{ fontWeight: 800, fontSize: 14, color: "var(--primary)" }}>
-            📋 Rule-Based Recommendations
+            Recommendations
           </div>
 
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           {[
             {
-              icon: "📦", title: "Procurement Priority",
+              icon: "", title: "Procurement Priority",
               color: "var(--red)", bg: "var(--red-lt)", border: "var(--red-md)",
               points: [
                 `Immediately restock: ${products.filter(p => p.reorder.status === "critical").map(p => p.product_name.split(" ").slice(0, 2).join(" ")).join(", ") || "no critical parts"}.`,
@@ -852,7 +856,7 @@ export default function Insights({ products, summary }) {
               ],
             },
             {
-              icon: "💰", title: "Capital Optimisation",
+              icon: "", title: "Capital Optimisation",
               color: "var(--purple)", bg: "var(--purple-lt)", border: "var(--purple-md)",
               points: [
                 `Offer fleet/garage bulk discounts on dead stock to recover Rs.${summary.dead_stock_value.toLocaleString()}.`,
@@ -861,7 +865,7 @@ export default function Insights({ products, summary }) {
               ],
             },
             {
-              icon: "📈", title: "Demand Planning",
+              icon: "", title: "Demand Planning",
               color: "var(--green)", bg: "var(--green-lt)", border: "var(--green-md)",
               points: [
                 `${summary.trending_up_count} parts show upward demand — increase safety stock.`,
@@ -870,7 +874,7 @@ export default function Insights({ products, summary }) {
               ],
             },
             {
-              icon: "🎯", title: "Supplier Strategy",
+              icon: "", title: "Supplier Strategy",
               color: "var(--teal)", bg: "var(--teal-lt)", border: "#a5f3fc",
               points: [
                 "Negotiate quantity discounts with brake and engine part suppliers.",
@@ -882,7 +886,7 @@ export default function Insights({ products, summary }) {
             <div key={i} style={{ background: item.bg, border: `1px solid ${item.border}`,
               borderRadius: 10, padding: 16 }}>
               <div style={{ fontSize: 12, color: item.color, fontWeight: 800, marginBottom: 10 }}>
-                {item.icon} {item.title}
+                {item.title}
               </div>
               {item.points.map((pt, j) => (
                 <div key={j} style={{ display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" }}>
@@ -905,8 +909,9 @@ export default function Insights({ products, summary }) {
           padding: "14px 22px", display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ width: 36, height: 36, borderRadius: 10,
             background: "rgba(255,255,255,0.15)",
-            display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>
-            🤖
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 11, fontWeight: 800, color: "#fff", fontFamily: "var(--mono)" }}>
+            AI
           </div>
           <div style={{ fontWeight: 800, fontSize: 15, color: "#fff" }}>
             AI Assistant

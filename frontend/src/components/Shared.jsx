@@ -9,10 +9,10 @@ export const TREND_ICON    = { up:"↑", down:"↓", stable:"→" };
 export const TREND_COLOR   = { up:"#16a34a", down:"#dc2626", stable:"#64748b" };
 
 export const CAT_ICON = {
-  Engine:"⚙️", Brakes:"🛑", Ignition:"⚡", Exterior:"🪟",
-  Electrical:"🔋", Transmission:"🔧", Cooling:"🌡️",
-  Suspension:"🚗", Steering:"🎯", Interior:"💺",
-  Exhaust:"💨", Default:"📦"
+  Engine:"", Brakes:"", Ignition:"", Exterior:"",
+  Electrical:"", Transmission:"", Cooling:"",
+  Suspension:"", Steering:"", Interior:"",
+  Exhaust:"", Default:""
 };
 
 export function MiniChart({ data, color, height=60 }) {
