@@ -29,17 +29,14 @@ function Skeleton() {
   );
 }
 
-function StatCard({ label, value, sub, accent, accentClass, icon, extra, delay="" }) {
+function StatCard({ label, value, sub, accent, accentClass, extra, delay="" }) {
   return (
     <div className={`card ${accentClass} fade-up${delay}`}>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
-        <div style={{width:38,height:38,borderRadius:10,
-          background:accent+"15",display:"flex",alignItems:"center",
-          justifyContent:"center",fontSize:18}}>
-          {icon}
+      {extra && (
+        <div style={{display:"flex",justifyContent:"flex-end",marginBottom:8}}>
+          {extra}
         </div>
-        {extra}
-      </div>
+      )}
       <div style={{fontSize:28,fontWeight:800,color:"var(--text)",lineHeight:1,
         fontFamily:"var(--font)",letterSpacing:"-0.02em",marginBottom:4}}>
         {value}
